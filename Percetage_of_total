@@ -1,0 +1,63 @@
+SELECT
+	SALES_MONTH,
+	KIND_OF_BUSINESS,
+	SALES,
+	(
+		SALES / SUM(SALES) OVER (
+			PARTITION BY
+				SALES_MONTH
+		)
+	) * 100 AS PCT_OF_TOTAL_SALES_MONTHLY
+FROM
+	RETAIL_SALES
+WHERE
+	KIND_OF_BUSINESS IN (
+		'Men''s clothing stores',
+		'Women''s clothing stores'
+	)
+ORDER BY
+	1
+
+
+"sales_month"	"kind_of_business"		"sales"	"total_sale"	"percentage_of_total"
+"1992-01-01"	"Men's clothing stores"		701	2574		27.23387723387723387700
+"1992-01-01"	"Women's clothing stores"	1873	2574		72.76612276612276612300
+"1992-02-01"	"Men's clothing stores"		658	2649		24.83956209890524726300
+"1992-02-01"	"Women's clothing stores"	1991	2649		75.16043790109475273700
+"1992-03-01"	"Men's clothing stores"		731	3134		23.32482450542437779200
+
+
+
+SELECT
+	*,
+	(sales / total_sale) *100 as pct_of_total_sales_monthly
+FROM
+	(
+		SELECT
+			A.SALES_MONTH,
+			A.KIND_OF_BUSINESS,
+			A.SALES,
+			SUM(B.SALES) as total_sale
+		FROM
+			RETAIL_SALES A
+			JOIN RETAIL_SALES B ON A.SALES_MONTH = B.SALES_MONTH
+			AND B.KIND_OF_BUSINESS IN (
+				'Men''s clothing stores',
+				'Women''s clothing stores'
+			)
+		WHERE
+			A.KIND_OF_BUSINESS IN (
+				'Men''s clothing stores',
+				'Women''s clothing stores'
+			)
+		GROUP BY
+			1,
+			2,
+			3
+		ORDER BY
+			1,
+			2,
+			3
+		LIMIT
+			5
+	)
