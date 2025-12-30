@@ -1,0 +1,42 @@
+SELECT
+	*,
+	FIRST_VALUE(YEARLY_SALES) OVER (
+		PARTITION BY
+			KIND_OF_BUSINESS
+		ORDER BY
+			SALES_YEAR
+	),
+	(
+		YEARLY_SALES / FIRST_VALUE(YEARLY_SALES) OVER (
+			PARTITION BY
+				KIND_OF_BUSINESS
+			ORDER BY
+				SALES_YEAR
+		) - 1
+	) * 100 AS PCT_CHANGE
+FROM
+	(
+		SELECT
+			DATE_PART('year', SALES_MONTH) AS SALES_YEAR,
+			KIND_OF_BUSINESS,
+			SUM(SALES) AS YEARLY_SALES
+		FROM
+			RETAIL_SALES
+		WHERE
+			KIND_OF_BUSINESS IN (
+				'Men''s clothing stores',
+				'Women''s clothing stores'
+			)
+		GROUP BY
+			1,
+			2
+	)
+
+limit 5
+
+"sales_year"	"kind_of_business"	    "yearly_sales"	"first_value"	"pct_change"
+1992	        "Men's clothing stores"	  10179	        10179	        0.00000000000000000000
+1993	        "Men's clothing stores"	  9962	        10179	        -2.13184006287454563300
+1994	        "Men's clothing stores"	  10032	        10179	        -1.44414972001178897700
+1995	        "Men's clothing stores"	  9315	        10179	        -8.48806366047745358100
+1996	        "Men's clothing stores"	  9546	        10179	        -6.21868552903035661700
