@@ -1,3 +1,10 @@
+"sales_month"	"naics_code"	"kind_of_business"			"reason_for_null"	"sales"
+"1992-01-01"	"44811"			"Men's clothing stores"							701
+"1992-01-01"	"44812"			"Women's clothing stores"						1873
+"1992-02-01"	"44811"			"Men's clothing stores"							658
+"1992-02-01"	"44812"			"Women's clothing stores"						1991
+"1992-03-01"	"44811"			"Men's clothing stores"							731
+
 SELECT
 	sales_month,
 	kind_of_business,
