@@ -16,4 +16,12 @@ SELECT
 FROM
 	RETAIL_SALES
 WHERE
+
 	KIND_OF_BUSINESS = 'Book stores'
+
+"sales_month"	"sales"	"previous_month"	"previous_month_sales"	"mom"
+"1992-01-01"	790			
+"1992-02-01"	539		"1992-01-01"		790						-32.00
+"1992-03-01"	535		"1992-02-01"		539						-1.00
+"1992-04-01"	523		"1992-03-01"		535						-2.00
+"1992-05-01"	552	"1992-04-01"	523	6.00
