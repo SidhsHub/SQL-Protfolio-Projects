@@ -1,3 +1,5 @@
+-- Calculating retention after entity has reached certain threshold
+
 SELECT
 	*,
 	FIRST_value(COHORT_RETAINED) over (partition by TERM_TYPE order by PERIOD) as cohort_size,
@@ -39,4 +41,14 @@ FROM
 		GROUP BY
 			1,
 			2
+
 	) AA
+
+/*
+"term_type"	"period"	"cohort_retained"	"cohort_size"	"pct_retained"
+"rep"	0	439	439	1.00000000000000000000
+"rep"	1	392	439	0.89293849658314350797
+"rep"	2	389	439	0.88610478359908883827
+"rep"	3	340	439	0.77448747152619589977
+"rep"	4	338	439	0.76993166287015945330
+*/
