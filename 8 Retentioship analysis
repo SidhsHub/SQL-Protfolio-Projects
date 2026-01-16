@@ -1,3 +1,5 @@
+-- How many legislators are there from the century they are elected
+
 SELECT
 	FIRST_CENTURY_COHORT,
 	PERIOD,
@@ -39,4 +41,14 @@ FROM
 		GROUP BY
 			1,
 			2
+
 	)
+
+/*
+"first_century_cohort"	"period"	"cohort_size"	"cohort_retained"	"pct_retained"
+18	0	368	368	1.00000000000000000000
+18	1	368	360	0.97826086956521739130
+18	2	368	242	0.65760869565217391304
+18	3	368	233	0.63315217391304347826
+18	4	368	149	0.40489130434782608696
+*/
