@@ -21,4 +21,14 @@ FROM
 		FROM
 			generate_series(1, 20, 1)
 	) b on 1=1 group by 1,2
+
 	--order by 1
+
+/*
+"first_century"	"terms"	"cohort_size"	"cohort_survived"	"pct_survived"
+18					1		368				368					1.0000
+18					2		368				249					0.6766
+18	3	368	153	0.4158
+18	4	368	96	0.2609
+18	5	368	63	0.1712
+*/
