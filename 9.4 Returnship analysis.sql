@@ -59,4 +59,13 @@ FROM
 			--AND age(C.TERM_START, B.first_term) <= interval '10 years'
 		GROUP BY
 			1
+
 	) BB ON AA.COHORT_CENTURY = BB.COHORT_CENTURY
+
+/*
+"cohort_century"	"pct_5_yr"	"pct_10_yr"	"pct_15_yr"
+	18					0.0502		0.0970		0.1438
+	19					0.0088		0.0244		0.0409
+20	0.0100	0.0348	0.0478
+21	0.0161	0.0307	0.0351
+*/
